@@ -1,0 +1,45 @@
+import 'package:dio/dio.dart';
+import 'package:final_project/core/helper/cache_helper.dart';
+import 'package:final_project/core/network/api_constants.dart';
+import 'package:final_project/core/network/dio_error_mapper.dart';
+import 'package:final_project/core/network/dio_helper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../models/user_model.dart';
+
+part 'login_state.dart';
+
+class LoginCubit extends Cubit<LoginState> {
+  LoginCubit() : super(LoginInitial());
+  bool rememberMe = false;
+
+  void toggleRememberMe(bool value) {
+    rememberMe = value;
+    emit(RememberMeChanged());
+  }
+
+  Future<void> login({required String email, required String password}) async {
+    emit(LoginLoading());
+    try {
+      final response = await DioHelper.postRequest(
+        endPoint: ApiConstants.loginEndPoint,
+        data: {"email": email, "password": password},
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final model = UserModel.fromJson(response.data);
+        if (model.accessToken == null) {
+          return emit(LoginFailure("No token found!"));
+        }
+        if (rememberMe) {
+          CacheHelper.saveToken(model.accessToken!);
+        }
+
+        emit(LoginSuccess());
+      }
+    } on DioException catch (e) {
+      emit(LoginFailure(DioErrorMapper.handleError(e)));
+    } catch (e) {
+      emit(LoginFailure(e.toString()));
+    }
+  }
+}
