@@ -36,7 +36,7 @@ class SignupScreen extends StatelessWidget {
                       AppField(
                         hint: "user@gmail.com",
                         label: "Email",
-                        validator: Validators.email,
+                        validator: Validators.username,
                         controller: emailController,
                       ),
                       const SizedBox(height: 16),

@@ -29,7 +29,28 @@ class CustomCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-              Image.asset(image, fit: BoxFit.contain, width: 126),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: 126,
+                    height: 99,
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(12),
+                        topLeft: Radius.circular(12),
+                      ),
+                    ),
+                  ),
+                  Image.network(
+                    image,
+                    fit: BoxFit.scaleDown,
+                    width: 126,
+                    height: 99,
+                  ),
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -38,8 +59,10 @@ class CustomCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
+                      maxLines: 1,
                       style: TextStyle(
                         color: AppColors.secondColor,
+                        // overflow: TextOverflow.ellipsis,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
@@ -55,15 +78,9 @@ class CustomCard extends StatelessWidget {
                   ],
                 ),
               ),
-
             ],
-
           ),
-          Positioned(
-            top: 8,
-            right: 8,
-            child: HeartIcon()
-          ),
+          Positioned(top: 8, right: 8, child: HeartIcon()),
         ],
       ),
     );

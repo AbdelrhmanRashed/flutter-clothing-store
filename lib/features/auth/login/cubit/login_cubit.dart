@@ -18,12 +18,12 @@ class LoginCubit extends Cubit<LoginState> {
     emit(RememberMeChanged());
   }
 
-  Future<void> login({required String email, required String password}) async {
+  Future<void> login({required String username, required String password}) async {
     emit(LoginLoading());
     try {
       final response = await DioHelper.postRequest(
         endPoint: ApiConstants.loginEndPoint,
-        data: {"email": email, "password": password},
+        data: {"username": username, "password": password},
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final model = UserModel.fromJson(response.data);

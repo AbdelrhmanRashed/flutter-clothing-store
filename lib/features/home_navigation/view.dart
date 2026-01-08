@@ -1,6 +1,6 @@
 import 'package:final_project/core/resources/app_colors.dart';
 import 'package:final_project/core/resources/app_icons.dart';
-import 'package:final_project/features/home_navigation/screens/home/home_screen.dart';
+import 'package:final_project/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController checkController = TextEditingController();
   LoginScreen({super.key});
@@ -71,10 +71,10 @@ class LoginScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             AppField(
-                              controller: emailController,
-                              hint: "Email",
-                              label: "Email",
-                              validator: Validators.email,
+                              controller: userNameController,
+                              hint: "Username",
+                              label: "Username",
+                              validator: Validators.username,
                             ),
                             const SizedBox(height: 22),
                             CustomPasswordField(
@@ -126,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             cubit.login(
-                              email: emailController.text.trim(),
+                              username: userNameController.text.trim(),
                               password: passwordController.text.trim(),
                             );
                           }
