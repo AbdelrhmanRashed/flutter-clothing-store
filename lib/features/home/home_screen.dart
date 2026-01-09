@@ -3,9 +3,10 @@ import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/core/resources/app_images.dart';
 import 'package:final_project/core/resources/app_loader.dart';
 import 'package:final_project/features/home/cubit/categories/categories_cubit.dart';
+import 'package:final_project/features/home/cubit/products_cubit/products_cubit.dart';
 import 'package:final_project/features/home/widgets/card.dart';
 import 'package:final_project/features/home/widgets/carousel.dart';
-import 'package:final_project/controllers/products_cubit/products_cubit.dart';
+import 'package:final_project/features/products/products_screen.dart';
 import 'package:final_project/widgets/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -172,6 +173,14 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductsScreen(category: "beauty"),
+                            ),
+                          );
+                        },
                         child: Text(
                           "See All",
                           style: TextStyle(
@@ -209,7 +218,7 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -221,6 +230,14 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ProductsScreen(category: "fragrances"),
+                            ),
+                          );
+                        },
                         child: Text(
                           "See All",
                           style: TextStyle(
@@ -244,13 +261,14 @@ class HomeScreen extends StatelessWidget {
                         if (state is ProductsSuccess) {
                           return ListView.separated(
                             itemBuilder: (context, index) => CustomCard(
-                              image: state.productsList[index+6].thumbnail,
-                              title: state.productsList[index+6].title,
-                              price: state.productsList[index+6].price.toString(),
+                              image: state.productsList[index + 6].thumbnail,
+                              title: state.productsList[index + 6].title,
+                              price: state.productsList[index + 6].price
+                                  .toString(),
                             ),
                             separatorBuilder: (context, index) =>
                                 const SizedBox(width: 16),
-                            itemCount: 6,
+                            itemCount: 4,
                             scrollDirection: Axis.horizontal,
                           );
                         }

@@ -3,4 +3,6 @@ class ApiConstants {
   static const String loginEndPoint = "auth/login";
   static const String categories = "products/category-list";
   static const String products = "products";
+  static const String productsCategory = "products/category";
+
 }

@@ -1,13 +1,11 @@
 import 'package:final_project/core/resources/app_colors.dart';
+import 'package:final_project/features/products/products_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesTabs extends StatefulWidget {
   final List<String> categories;
 
-  const CategoriesTabs({
-    super.key,
-    required this.categories,
-  });
+  const CategoriesTabs({super.key, required this.categories});
 
   @override
   State<CategoriesTabs> createState() => _CategoriesTabsState();
@@ -34,6 +32,12 @@ class _CategoriesTabsState extends State<CategoriesTabs> {
             selected: isSelected,
             showCheckmark: false,
             onSelected: (_) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProductsScreen(category: categories[index]),
+                ),
+              );
               setState(() {
                 selectedIndex = index;
               });
@@ -43,14 +47,9 @@ class _CategoriesTabsState extends State<CategoriesTabs> {
             labelStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: isSelected
-                  ? Colors.white
-                  : AppColors.secondColor,
+              color: isSelected ? Colors.white : AppColors.secondColor,
             ),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           );
         },
       ),
