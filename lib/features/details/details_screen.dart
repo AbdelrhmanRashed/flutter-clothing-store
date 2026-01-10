@@ -4,10 +4,10 @@ import 'package:final_project/core/resources/app_button.dart';
 import 'package:final_project/core/resources/app_colors.dart';
 import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/core/resources/app_images.dart';
-import 'package:final_project/core/resources/app_loader.dart';
 import 'package:final_project/features/Rating/rating_screen.dart';
 import 'package:final_project/features/details/cubit/details_cubit.dart';
 import 'package:final_project/features/details/widgets/circle_icon.dart';
+import 'package:final_project/features/details/widgets/details_shimmer.dart';
 import 'package:final_project/features/details/widgets/stock.dart';
 import 'package:final_project/features/details/widgets/products_carousal.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class DetailsScreen extends StatelessWidget {
             },
             builder: (context, state) {
               if (state is DetailsLoading) {
-                return AppLoader();
+                return DetailsShimmer();
               }
               if (state is DetailsSuccess) {
                 final double priceBeforeDiscount =

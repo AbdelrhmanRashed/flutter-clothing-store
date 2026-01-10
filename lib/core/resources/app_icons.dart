@@ -14,4 +14,5 @@ class AppIcons {
   static const String share = 'assets/icons/share.svg';
   static const String contact = 'assets/icons/contact.svg';
   static const String help = 'assets/icons/help.svg';
+  static const String trash = 'assets/icons/trash.svg';
 }

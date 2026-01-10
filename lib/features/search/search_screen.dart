@@ -5,6 +5,7 @@ import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/core/resources/app_json.dart';
 import 'package:final_project/core/resources/app_loader.dart';
 import 'package:final_project/features/products/widgets/card.dart';
+import 'package:final_project/features/products/widgets/products_grid_shimmer.dart';
 import 'package:final_project/features/search/cubit/search_cubit.dart';
 import 'package:final_project/widgets/search_form_field.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +93,10 @@ class SearchScreen extends StatelessWidget {
                           );
                         }
                         if (state is SearchLoading) {
-                          return AppLoader();
+                          return Expanded(child: Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: ProductsGridShimmer(),
+                          ));
                         }
                         if (state is SearchSuccess) {
                           return Expanded(

@@ -2,20 +2,25 @@ import 'package:final_project/core/resources/app_colors.dart';
 import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/core/resources/app_images.dart';
 import 'package:final_project/core/resources/app_loader.dart';
+import 'package:final_project/features/categories/categories_screen.dart';
 import 'package:final_project/features/details/details_screen.dart';
-import 'package:final_project/features/home/cubit/categories/categories_cubit.dart';
+import 'package:final_project/features/categories/cubit/categories_cubit.dart';
 import 'package:final_project/features/home/widgets/card.dart';
 import 'package:final_project/features/home/widgets/carousel.dart';
+import 'package:final_project/features/home/widgets/products_shimmer.dart';
 import 'package:final_project/features/home/widgets/section_title.dart';
+import 'package:final_project/features/home/widgets/user_header_shimmer.dart';
 import 'package:final_project/features/products/cubit/products_cubit.dart';
 import 'package:final_project/features/products/products_screen.dart';
 import 'package:final_project/features/search/search_screen.dart';
 import 'package:final_project/widgets/banner.dart';
-import 'package:final_project/widgets/categories.dart';
+import 'package:final_project/features/categories/widgets/categories_tabs.dart';
 import 'package:final_project/widgets/search_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../auth/auth_cubit/auth_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -42,43 +47,96 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.grey,
-                        ),
-                        child: Image.asset(AppImages.userImage),
-                      ),
-                      const SizedBox(width: 16),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Hello!", style: TextStyle(fontSize: 12)),
-                          Text(
-                            "John William",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
+                  BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      if (state is AuthUserLoading) {
+                        return UserHeaderShimmer();
+                      }
+                      if (state is AuthUserLoaded) {
+                        return Row(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.grey,
+                              ),
+                              child: Image.network(state.user?.image ?? ""),
                             ),
+                            const SizedBox(width: 16),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Hello!",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                Text(
+                                  "${state.user?.firstName} ${state.user?.lastName}",
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Container(
+                              width: 48,
+                              height: 48,
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Color(0xffF8F7F7),
+                              ),
+                              child: SvgPicture.asset(AppIcons.notification),
+                            ),
+                          ],
+                        );
+                      }
+                      return Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.grey,
+                            ),
+                            child: Image.asset(AppImages.userImage),
+                          ),
+                          const SizedBox(width: 16),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Hello!",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              Text(
+                                "user",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          Container(
+                            width: 48,
+                            height: 48,
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Color(0xffF8F7F7),
+                            ),
+                            child: SvgPicture.asset(AppIcons.notification),
                           ),
                         ],
-                      ),
-                      const Spacer(),
-                      Container(
-                        width: 48,
-                        height: 48,
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Color(0xffF8F7F7),
-                        ),
-                        child: SvgPicture.asset(AppIcons.notification),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                   const SizedBox(height: 24),
                   SearchFormField(
@@ -107,28 +165,35 @@ class HomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
-                        "See All",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.mainColor,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => CategoriesScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "See All",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.mainColor,
+                          ),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
                   SizedBox(
-                    height: 50,
+                    height: 160,
                     child: BlocBuilder<CategoriesCubit, CategoriesState>(
                       builder: (context, state) {
                         if (state is CategoriesLoading) {
-                          return AppLoader();
+                          return ProductsShimmer();
                         }
                         if (state is CategoriesSuccess) {
-                          return CategoriesTabs(
-                            categories: state.categoriesList,
-                          );
+                          return CategoriesTabs(categories: state.categories);
                         }
                         return const SizedBox.shrink();
                       },
@@ -156,7 +221,7 @@ class HomeScreen extends StatelessWidget {
                       child: BlocBuilder<ProductsCubit, ProductsState>(
                         builder: (context, state) {
                           if (state is ProductsLoading) {
-                            return AppLoader();
+                            return const ProductsShimmer();
                           }
                           if (state is ProductsSuccess) {
                             return ListView.separated(
@@ -210,7 +275,7 @@ class HomeScreen extends StatelessWidget {
                       child: BlocBuilder<ProductsCubit, ProductsState>(
                         builder: (context, state) {
                           if (state is ProductsLoading) {
-                            return AppLoader();
+                            return const ProductsShimmer();
                           }
                           if (state is ProductsSuccess) {
                             return ListView.separated(

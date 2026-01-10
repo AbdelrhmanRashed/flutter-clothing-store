@@ -1,10 +1,6 @@
 import 'package:final_project/core/network/dio_helper.dart';
-import 'package:final_project/features/Rating/rating_screen.dart';
 import 'package:final_project/features/auth/login/view/login_screen.dart';
-import 'package:final_project/features/details/details_screen.dart';
-import 'package:final_project/features/home_navigation/view.dart';
-import 'package:final_project/features/products/products_screen.dart';
-import 'package:final_project/features/search/search_screen.dart';
+import 'package:final_project/features/home/home_screen.dart';
 import 'package:final_project/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(fontFamily: "Poppins"),
-      home: HomeNav(),
+      home: SplashScreen(),
     );
   }
 }

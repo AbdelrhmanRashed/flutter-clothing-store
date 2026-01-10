@@ -5,6 +5,7 @@ import 'package:final_project/core/resources/app_loader.dart';
 import 'package:final_project/features/details/details_screen.dart';
 import 'package:final_project/features/products/cubit/products_cubit.dart';
 import 'package:final_project/features/products/widgets/card.dart';
+import 'package:final_project/features/products/widgets/products_grid_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +25,7 @@ class ProductsScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Text(
-            category,
+            category.replaceAll("-", " "),
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 18,
@@ -45,7 +46,10 @@ class ProductsScreen extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is ProductsLoading) {
-              return AppLoader();
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: const ProductsGridShimmer(),
+              );
             }
             if (state is ProductsSuccess) {
               return Padding(

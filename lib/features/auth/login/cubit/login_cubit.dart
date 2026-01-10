@@ -31,8 +31,9 @@ class LoginCubit extends Cubit<LoginState> {
           return emit(LoginFailure("No token found!"));
         }
         if (rememberMe) {
-          CacheHelper.saveToken(model.accessToken!);
+          await CacheHelper.saveToken(model.accessToken!);
         }
+        await CacheHelper.saveUser(model);
 
         emit(LoginSuccess());
       }
