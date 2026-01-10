@@ -17,7 +17,7 @@ class Rating extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          rating.toStringAsFixed(1),
+          rating.toString(),
           style: const TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 32,

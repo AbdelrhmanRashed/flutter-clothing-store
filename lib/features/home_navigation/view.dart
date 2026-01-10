@@ -1,6 +1,7 @@
 import 'package:final_project/core/resources/app_colors.dart';
 import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/features/home/home_screen.dart';
+import 'package:final_project/features/profile/profile_screen.dart';
 import 'package:final_project/features/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,7 +18,7 @@ class HomeNavState extends State<HomeNav> {
     HomeScreen(),
     SearchScreen(query: "", isFromBottomNav: true),
     SizedBox(),
-    SizedBox(),
+    ProfileScreen(),
   ];
   int currentIndex = 0;
 

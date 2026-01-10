@@ -120,6 +120,8 @@ class DetailsScreen extends StatelessWidget {
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   color: AppColors.hintColor,
+                                  decorationThickness: 1.3,
+                                  decorationStyle: TextDecorationStyle.solid
                                 ),
                               ),
                             ],
@@ -346,9 +348,11 @@ Widget _price({
       const SizedBox(width: 8),
       Text(
         "\$${priceBefore.toStringAsFixed(2)}",
+
         style: const TextStyle(
           decoration: TextDecoration.lineThrough,
-          color: Color(0xff9CA3AF),
+          decorationColor: AppColors.hintColor,
+          color: AppColors.hintColor,
         ),
       ),
     ],

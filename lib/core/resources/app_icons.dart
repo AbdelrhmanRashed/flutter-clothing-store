@@ -10,4 +10,8 @@ class AppIcons {
   static const String bag = 'assets/icons/bag.svg';
   static const String arrowBack = 'assets/icons/arrow-back.svg';
   static const String clear = 'assets/icons/clear.svg';
+  static const String setting = 'assets/icons/setting.svg';
+  static const String share = 'assets/icons/share.svg';
+  static const String contact = 'assets/icons/contact.svg';
+  static const String help = 'assets/icons/help.svg';
 }
