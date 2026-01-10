@@ -4,7 +4,7 @@ class AppButton extends StatelessWidget {
   const AppButton({super.key, required this.onPressed, required this.color,required this.child, });
 
   final Widget child;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color color;
 
 
@@ -18,7 +18,7 @@ class AppButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(100),
           ),
           elevation: 0,
         ),

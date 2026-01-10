@@ -2,49 +2,45 @@ import 'package:final_project/core/resources/app_colors.dart';
 import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/core/resources/app_images.dart';
 import 'package:final_project/core/resources/app_loader.dart';
+import 'package:final_project/features/details/details_screen.dart';
 import 'package:final_project/features/home/cubit/categories/categories_cubit.dart';
-import 'package:final_project/features/home/cubit/products_cubit/products_cubit.dart';
 import 'package:final_project/features/home/widgets/card.dart';
 import 'package:final_project/features/home/widgets/carousel.dart';
+import 'package:final_project/features/home/widgets/section_title.dart';
+import 'package:final_project/features/products/cubit/products_cubit.dart';
 import 'package:final_project/features/products/products_screen.dart';
+import 'package:final_project/widgets/banner.dart';
 import 'package:final_project/widgets/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<String> images = [
-    AppImages.shape3,
-    AppImages.shape2,
-    AppImages.shape1,
-  ];
-  final List<String> titles = ["Watch", "Nike Shoes", "LG TV"];
-  final List<String> prices = ["40", "430", "330"];
-
   HomeScreen({super.key});
+
+  final List<Widget> banners = [
+    CustomBanner(),
+    CustomBanner(),
+    CustomBanner(),
+    CustomBanner(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<CategoriesCubit>(
-          create: (context) => CategoriesCubit()..getCategories(),
-        ),
-        BlocProvider<ProductsCubit>(
-          create: (context) => ProductsCubit()..getProducts(limit: 12),
-        ),
+        BlocProvider(create: (_) => CategoriesCubit()..getCategories()),
       ],
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         width: 48,
@@ -56,16 +52,10 @@ class HomeScreen extends StatelessWidget {
                         child: Image.asset(AppImages.userImage),
                       ),
                       const SizedBox(width: 16),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Hello!",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
+                          Text("Hello!", style: TextStyle(fontSize: 12)),
                           Text(
                             "John William",
                             style: TextStyle(
@@ -77,10 +67,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const Spacer(),
                       Container(
-                        alignment: AlignmentDirectional.center,
                         width: 48,
                         height: 48,
-                        padding: EdgeInsetsGeometry.all(12),
+                        padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           color: Color(0xffF8F7F7),
@@ -90,22 +79,16 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-
                   TextFormField(
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0xffF8F7F7),
-
-                      prefixIcon: Container(
-                        width: 24,
-                        height: 24,
-                        padding: EdgeInsets.all(14),
+                      fillColor: const Color(0xffF8F7F7),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(14),
                         child: SvgPicture.asset(AppIcons.search),
                       ),
-
                       hintText: "Search Here",
                       hintStyle: TextStyle(color: AppColors.hintColor),
-
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -120,26 +103,24 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 22),
-                  Carousel(count: 4),
+                  Carousel(items: banners, ratio: 2.2, count: 4),
                   const SizedBox(height: 22),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Categories",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      GestureDetector(
-                        child: Text(
-                          "See All",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.mainColor,
-                          ),
+                      Text(
+                        "See All",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.mainColor,
                         ),
                       ),
                     ],
@@ -157,123 +138,116 @@ class HomeScreen extends StatelessWidget {
                             categories: state.categoriesList,
                           );
                         }
-                        return SizedBox();
+                        return const SizedBox.shrink();
                       },
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Featured",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                  SectionTitle(
+                    title: "Featured",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ProductsScreen(category: "mens-watches"),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ProductsScreen(category: "beauty"),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "See All",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.mainColor,
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                   const SizedBox(height: 12),
-                  SizedBox(
-                    height: 152,
-                    child: BlocBuilder<ProductsCubit, ProductsState>(
-                      builder: (context, state) {
-                        print(state);
-                        if (state is ProductsLoading) {
-                          return AppLoader();
-                        }
-                        if (state is ProductsSuccess) {
-                          return ListView.separated(
-                            itemBuilder: (context, index) => CustomCard(
-                              image: state.productsList[index].thumbnail,
-                              title: state.productsList[index].title,
-                              price: state.productsList[index].price.toString(),
-                            ),
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(width: 16),
-                            itemCount: 6,
-                            scrollDirection: Axis.horizontal,
-                          );
-                        }
-                        return SizedBox();
-                      },
+                  BlocProvider(
+                    create: (_) =>
+                        ProductsCubit()..getProducts(category: "mens-watches"),
+                    child: SizedBox(
+                      height: 152,
+                      child: BlocBuilder<ProductsCubit, ProductsState>(
+                        builder: (context, state) {
+                          if (state is ProductsLoading) {
+                            return AppLoader();
+                          }
+                          if (state is ProductsSuccess) {
+                            return ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.productsList.length,
+                              itemBuilder: (context, index) => GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsScreen(
+                                        id: state.productsList[index].id,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: CustomCard(
+                                  image: state.productsList[index].thumbnail,
+                                  title: state.productsList[index].title,
+                                  price: state.productsList[index].price
+                                      .toString(),
+                                ),
+                              ),
+                              separatorBuilder: (_, __) =>
+                                  const SizedBox(width: 16),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Most Popular",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                  SectionTitle(
+                    title: "Most Popular",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ProductsScreen(category: "fragrances"),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ProductsScreen(category: "fragrances"),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "See All",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.mainColor,
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                   const SizedBox(height: 12),
-                  SizedBox(
-                    height: 152,
-                    child: BlocBuilder<ProductsCubit, ProductsState>(
-                      builder: (context, state) {
-                        print(state);
-                        if (state is ProductsLoading) {
-                          return AppLoader();
-                        }
-                        if (state is ProductsSuccess) {
-                          return ListView.separated(
-                            itemBuilder: (context, index) => CustomCard(
-                              image: state.productsList[index + 6].thumbnail,
-                              title: state.productsList[index + 6].title,
-                              price: state.productsList[index + 6].price
-                                  .toString(),
-                            ),
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(width: 16),
-                            itemCount: 4,
-                            scrollDirection: Axis.horizontal,
-                          );
-                        }
-                        return SizedBox();
-                      },
+                  BlocProvider(
+                    create: (_) =>
+                        ProductsCubit()..getProducts(category: "fragrances"),
+                    child: SizedBox(
+                      height: 152,
+                      child: BlocBuilder<ProductsCubit, ProductsState>(
+                        builder: (context, state) {
+                          if (state is ProductsLoading) {
+                            return AppLoader();
+                          }
+                          if (state is ProductsSuccess) {
+                            return ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.productsList.length,
+                              itemBuilder: (context, index) => GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsScreen(
+                                        id: state.productsList[index].id,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: CustomCard(
+                                  image: state.productsList[index].thumbnail,
+                                  title: state.productsList[index].title,
+                                  price: state.productsList[index].price
+                                      .toString(),
+                                ),
+                              ),
+                              separatorBuilder: (_, __) =>
+                                  const SizedBox(width: 16),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
                     ),
                   ),
                 ],

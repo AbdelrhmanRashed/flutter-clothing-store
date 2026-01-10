@@ -1,5 +1,6 @@
 import 'package:final_project/core/network/dio_helper.dart';
 import 'package:final_project/features/auth/login/view/login_screen.dart';
+import 'package:final_project/features/details/details_screen.dart';
 import 'package:final_project/features/home_navigation/view.dart';
 import 'package:final_project/features/products/products_screen.dart';
 import 'package:final_project/features/splash/splash_screen.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(fontFamily: "Roboto"),
+      theme: ThemeData(fontFamily: "Poppins"),
       home: HomeNav(),
     );
   }
