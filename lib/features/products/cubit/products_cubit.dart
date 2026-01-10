@@ -16,7 +16,7 @@ class ProductsCubit extends Cubit<ProductsState> {
 
     try {
       final String endPoint = category == allCategory
-          ? "${ApiConstants.products}?limit=120"
+          ? "${ApiConstants.products}?limit=99999"
           : "${ApiConstants.productsCategory}/$category";
 
       final response = await DioHelper.getRequest(endPoint: endPoint);

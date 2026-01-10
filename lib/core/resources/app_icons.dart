@@ -9,4 +9,5 @@ class AppIcons {
   static const String star = 'assets/icons/star.svg';
   static const String bag = 'assets/icons/bag.svg';
   static const String arrowBack = 'assets/icons/arrow-back.svg';
+  static const String clear = 'assets/icons/clear.svg';
 }

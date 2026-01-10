@@ -5,6 +5,7 @@ import 'package:final_project/core/resources/app_colors.dart';
 import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/core/resources/app_images.dart';
 import 'package:final_project/core/resources/app_loader.dart';
+import 'package:final_project/features/Rating/rating_screen.dart';
 import 'package:final_project/features/details/cubit/details_cubit.dart';
 import 'package:final_project/features/details/widgets/circle_icon.dart';
 import 'package:final_project/features/details/widgets/stock.dart';
@@ -31,109 +32,117 @@ class DetailsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
 
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: BlocConsumer<DetailsCubit, DetailsState>(
-              listener: (context, state) {
-                print("===========$state==========");
-                if (state is DetailsFailure) {
-                  SnackBarHelper.show(
-                    context: context,
-                    message: state.errMsg,
-                    type: AnimatedSnackBarType.error,
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is DetailsLoading) {
-                  return AppLoader();
-                }
-                if (state is DetailsSuccess) {
-                  final double priceBeforeDiscount =
-                      state.productDetails.price /
-                      (1 - state.productDetails.discountPercentage / 100);
+        body: SingleChildScrollView(
+          child: BlocConsumer<DetailsCubit, DetailsState>(
+            listener: (context, state) {
+              print("===========$state==========");
+              if (state is DetailsFailure) {
+                SnackBarHelper.show(
+                  context: context,
+                  message: state.errMsg,
+                  type: AnimatedSnackBarType.error,
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is DetailsLoading) {
+                return AppLoader();
+              }
+              if (state is DetailsSuccess) {
+                final double priceBeforeDiscount =
+                    state.productDetails.price /
+                    (1 - state.productDetails.discountPercentage / 100);
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Stack(
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Color(0xFFF9FAFB), Color(0xFFF3F4F6)],
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ProductsCarousal(
+                            imageUrls: state.productDetails.images,
+                            autoPlay: state.productDetails.images.length > 1,
+                            ratio: 1.1,
+                          ),
+                        ),
+                        Positioned(
+                          top: 40,
+                          left: 16,
+                          child: CircleIcon(
+                            icon: AppIcons.arrowBack,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                        Positioned(
+                          top: 40,
+                          right: 16,
+                          child: CircleIcon(
+                            icon: AppIcons.heartFill,
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Color(0xFFF9FAFB),
-                                  Color(0xFFF3F4F6),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: ProductsCarousal(
-                              imageUrls: state.productDetails.images,
-                              autoPlay: state.productDetails.images.length > 1,
-                              ratio: 1.1,
-                            ),
-                          ),
-                          Positioned(
-                            top: 16,
-                            left: 16,
-                            child: CircleIcon(
-                              icon: AppIcons.arrowBack,
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Positioned(
-                            top: 16,
-                            right: 16,
-                            child: CircleIcon(
-                              icon: AppIcons.heartFill,
-                              onTap: () {},
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    state.productDetails.title,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "\$${priceBeforeDiscount.toStringAsFixed(2)}",
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  state.productDetails.title,
                                   style: TextStyle(
-                                    decoration: TextDecoration.lineThrough,
-                                    decorationColor: AppColors.hintColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.hintColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
+                              ),
+                              Text(
+                                "\$${priceBeforeDiscount.toStringAsFixed(2)}",
+                                style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  decorationColor: AppColors.hintColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.hintColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => RatingScreen(
+                                        reviews: state.productDetails.reviews,
+                                        rating : state.productDetails.rating
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     SvgPicture.asset(AppIcons.star),
                                     const SizedBox(width: 6),
@@ -152,105 +161,109 @@ class DetailsScreen extends StatelessWidget {
                                         color: Color(0xff7D7A7A),
                                       ),
                                     ),
-                                  ],
-                                ),
-
-                                Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 4,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffF26682),
-                                        borderRadius: BorderRadius.circular(6),
-                                      ),
-                                      child: Text(
-                                        "${state.productDetails.discountPercentage}%",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      "\$${state.productDetails.price}",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    const SizedBox(width: 4),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      size: 12,
+                                      color: Color(0xff7D7A7A),
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
+                              ),
 
-                            Stock(
-                              text: state.productDetails.availabilityStatus,
-                            ),
-                            const SizedBox(height: 15),
-                            Text(
-                              "Description",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffF26682),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      "${state.productDetails.discountPercentage}%",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    "\$${state.productDetails.price}",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              maxLines: 4,
-                              state.productDetails.description,
-                              style: TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xff9B9999),
-                              ),
-                            ),
-                            const SizedBox(height: 15),
-                            Text(
-                              "Stock",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(height: 12),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
 
-                            Container(
-                              width: 44,
-                              height: 44,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: const Color(0xFFCFCDCD),
-                                  width: 1.5,
-                                ),
-                              ),
-                              child: Text(
-                                state.productDetails.stock.toString(),
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
+                          Stock(text: state.productDetails.availabilityStatus),
+                          const SizedBox(height: 15),
+                          Text(
+                            "Description",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            maxLines: 4,
+                            state.productDetails.description,
+                            style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff9B9999),
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          Text(
+                            "Stock",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+
+                          Container(
+                            width: 44,
+                            height: 44,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: const Color(0xFFCFCDCD),
+                                width: 1.5,
                               ),
                             ),
-                          ],
-                        ),
+                            child: Text(
+                              state.productDetails.stock.toString(),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  );
-                }
-                return SizedBox();
-              },
-            ),
+                    ),
+                  ],
+                );
+              }
+              return SizedBox();
+            },
           ),
         ),
 

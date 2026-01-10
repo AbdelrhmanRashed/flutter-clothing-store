@@ -9,8 +9,10 @@ import 'package:final_project/features/home/widgets/carousel.dart';
 import 'package:final_project/features/home/widgets/section_title.dart';
 import 'package:final_project/features/products/cubit/products_cubit.dart';
 import 'package:final_project/features/products/products_screen.dart';
+import 'package:final_project/features/search/search_screen.dart';
 import 'package:final_project/widgets/banner.dart';
 import 'package:final_project/widgets/categories.dart';
+import 'package:final_project/widgets/search_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -79,28 +81,18 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color(0xffF8F7F7),
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(14),
-                        child: SvgPicture.asset(AppIcons.search),
-                      ),
-                      hintText: "Search Here",
-                      hintStyle: TextStyle(color: AppColors.hintColor),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(
-                          color: AppColors.mainColor,
-                          width: 2,
-                        ),
-                      ),
-                    ),
+                  SearchFormField(
+                    onChanged: (value) {
+                      if (value.isNotEmpty) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchScreen(query: value),
+                          ),
+                        );
+                      }
+                    },
+                    autofocus: false,
                   ),
                   const SizedBox(height: 22),
                   Carousel(items: banners, ratio: 2.2, count: 4),

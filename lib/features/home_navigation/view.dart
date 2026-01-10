@@ -1,6 +1,7 @@
 import 'package:final_project/core/resources/app_colors.dart';
 import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/features/home/home_screen.dart';
+import 'package:final_project/features/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,7 +13,12 @@ class HomeNav extends StatefulWidget {
 }
 
 class HomeNavState extends State<HomeNav> {
-  List<Widget> screens = [HomeScreen(), SizedBox(), SizedBox(), SizedBox()];
+  List<Widget> screens = [
+    HomeScreen(),
+    SearchScreen(query: "", isFromBottomNav: true),
+    SizedBox(),
+    SizedBox(),
+  ];
   int currentIndex = 0;
 
   @override
