@@ -1,102 +1,98 @@
-
 import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_icons.dart';
-import 'package:final_project/core/resources/app_images.dart';
+import 'package:final_project/features/cart/cubit/cart_cubit.dart';
 import 'package:final_project/features/cart/widgets/cart_counter.dart';
+import 'package:final_project/models/cart_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CartItem extends StatefulWidget {
-  const CartItem({super.key});
+class CartItem extends StatelessWidget {
+  final CartModel item;
 
-  @override
-  State<CartItem> createState() => _CartItemState();
-}
+  const CartItem({super.key, required this.item});
 
-class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key:  UniqueKey(),
+      key: ValueKey(item.id),
       direction: DismissDirection.endToStart,
+      onDismissed: (_) {
+        context.read<CartCubit>().removeItem(item.id);
+      },
       background: Container(
-        decoration: BoxDecoration(
-           color: const Color(0xffA42B32),
-          borderRadius: BorderRadius.all(Radius.circular(8))
-        ),
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-
+        decoration: BoxDecoration(
+          color: const Color(0xffA42B32),
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: const Icon(
           Icons.delete_outline_outlined,
           color: Colors.white,
-          size: 35,
+          size: 30,
         ),
       ),
       child: Container(
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
+
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Color(0xFFF3F3F3), width: 1),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(AppImages.shape1, width: 83, fit: BoxFit.fitWidth),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              "T Shirt",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.secondColor,
-                              ),
-                            ),
-                            Text(
-                              "Size L",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.hintColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SvgPicture.asset(AppIcons.trash),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "\$ 1,100",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.secondColor,
-                          ),
-                        ),
-                        CounterWidget()
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          border: Border.all(
+            color: Colors.grey.shade200,
+            width: 1,
           ),
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                item.image,
+                width: 70,
+                height: 70,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.secondColor,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "\$${item.total.toStringAsFixed(2)}",
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.mainColor,
+                        ),
+                      ),
+                      CounterWidget(
+                        quantity: item.quantity,
+                        onIncrement: () =>
+                            context.read<CartCubit>().increment(item.id),
+                        onDecrement: () =>
+                            context.read<CartCubit>().decrement(item.id),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

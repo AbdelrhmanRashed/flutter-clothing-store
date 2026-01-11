@@ -1,61 +1,50 @@
-
 import 'package:final_project/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CounterWidget extends StatefulWidget {
-  const CounterWidget({super.key});
+class CounterWidget extends StatelessWidget {
+  final int quantity;
+  final VoidCallback onIncrement;
+  final VoidCallback onDecrement;
 
-  @override
-  State<CounterWidget> createState() => _CounterWidgetState();
-}
-
-class _CounterWidgetState extends State<CounterWidget> {
-  int itemCount = 1;
+  const CounterWidget({
+    super.key,
+    required this.quantity,
+    required this.onIncrement,
+    required this.onDecrement,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.min,
       children: [
-        _buildCounterButton(
-          icon: Icons.remove,
-          onTap: () {
-            if (itemCount > 1) setState(() => itemCount--);
-          },
-        ),
+        buildButton(Icons.remove, onDecrement),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
-            "$itemCount",
-            style: TextStyle(
+            quantity.toString(),
+            style: const TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: AppColors.secondColor,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        _buildCounterButton(
-          icon: Icons.add,
-          onTap: () => setState(() => itemCount++),
-        ),
+        buildButton(Icons.add, onIncrement),
       ],
     );
   }
 
-  Widget _buildCounterButton({required IconData icon, required VoidCallback onTap}) {
+  Widget buildButton(IconData icon, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 32,
-        height: 32,
+        padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: const Color(0xFFE6E6E6)),
+          border: Border.all(color: Colors.grey.shade300),
         ),
         child: Icon(
           icon,
-          size: 18,
+          size: 16,
           color: AppColors.secondColor,
         ),
       ),

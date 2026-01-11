@@ -3,6 +3,7 @@ import 'package:final_project/core/resources/app_colors.dart';
 import 'package:final_project/core/resources/app_icons.dart';
 import 'package:final_project/features/auth/auth_cubit/auth_cubit.dart';
 import 'package:final_project/features/cart/cart_screen.dart';
+import 'package:final_project/features/cart/cubit/cart_cubit.dart';
 import 'package:final_project/features/home/home_screen.dart';
 import 'package:final_project/features/profile/profile_screen.dart';
 import 'package:final_project/features/search/search_screen.dart';
@@ -12,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeNav extends StatefulWidget {
-
   const HomeNav({super.key});
 
   @override
@@ -33,11 +33,11 @@ class HomeNavState extends State<HomeNav> {
     loadUser();
   }
 
-  List<Widget> screens = [
+  final List<Widget> screens = [
     HomeScreen(),
-    SearchScreen(query: "", isFromBottomNav: true),
-    CartScreen(),
-    ProfileScreen(),
+    const SearchScreen(query: "", isFromBottomNav: true),
+    const CartScreen(),
+    const ProfileScreen(),
   ];
   int currentIndex = 0;
 
@@ -45,6 +45,7 @@ class HomeNavState extends State<HomeNav> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit()..loadUser(),
+
       child: Scaffold(
         backgroundColor: Color(0xffFFFFFF),
         bottomNavigationBar: Container(

@@ -16,20 +16,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 4), () async {
-      CacheHelper.getToken().then((value) {
-        if (mounted) {
-          if (value.isEmpty) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => LoginScreen()),
-            );
-          } else {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => HomeNav()),
-            );
-          }
-        }
-      });
+    Future.delayed(const Duration(seconds: 4), () async {
+      final token = await CacheHelper.getToken();
+
+      if (!mounted) return;
+
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (_) => token.isEmpty ? LoginScreen() : HomeNav(),
+        ),
+        (route) => false,
+      );
     });
   }
 

@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
             if (state is LoginSuccess) {
               Navigator.of(
                 context,
-              ).push(MaterialPageRoute(builder: (context) => HomeNav()));
+              ).pushReplacement(MaterialPageRoute(builder: (context) => HomeNav()));
 
               SnackBarHelper.show(
                 context: context,

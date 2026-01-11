@@ -6,6 +6,20 @@ class Validators {
 
     return null;
   }
+  static String? firstName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "FirstName is required";
+    }
+
+    return null;
+  }
+  static String? lastName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "LastName is required";
+    }
+
+    return null;
+  }
 
   static String? password(String? value) {
     if (value == null || value.trim().isEmpty) {
