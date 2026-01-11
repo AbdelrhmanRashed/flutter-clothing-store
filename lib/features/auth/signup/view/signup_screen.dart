@@ -48,8 +48,10 @@ class SignupScreen extends StatelessWidget {
                 message: "Sign Up Successfully",
                 type: AnimatedSnackBarType.success,
               );
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomeNav()),
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => HomeNav()),
+                    (route) => false,
               );
             }
           },

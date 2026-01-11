@@ -44,8 +44,10 @@ class SignOutDialog extends StatelessWidget {
               onPressed: () async {
                 final navigator = Navigator.of(context);
                 CacheHelper.deleteUser();
-                navigator.pushReplacement(
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => LoginScreen()),
+                      (route) => false,
                 );
               },
               style: ElevatedButton.styleFrom(

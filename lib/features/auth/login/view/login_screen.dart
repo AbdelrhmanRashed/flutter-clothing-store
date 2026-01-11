@@ -39,16 +39,17 @@ class LoginScreen extends StatelessWidget {
               );
             }
             if (state is LoginSuccess) {
-              Navigator.of(
+              Navigator.pushAndRemoveUntil(
                 context,
-              ).pushReplacement(MaterialPageRoute(builder: (context) => HomeNav()));
+                MaterialPageRoute(builder: (_) => HomeNav()),
+                (route) => false,
+              );
 
               SnackBarHelper.show(
                 context: context,
                 message: "Logged in successfully",
                 type: AnimatedSnackBarType.success,
               );
-
             }
           },
           builder: (context, state) {
