@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:final_project/core/helper/cache_helper.dart';
-import 'package:final_project/core/network/api_constants.dart';
-import 'package:final_project/core/network/dio_error_mapper.dart';
-import 'package:final_project/core/network/dio_helper.dart';
+import 'package:Store/core/helper/cache_helper.dart';
+import 'package:Store/core/network/api_constants.dart';
+import 'package:Store/core/network/dio_error_mapper.dart';
+import 'package:Store/core/network/dio_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../models/user_model.dart';
@@ -18,7 +18,10 @@ class LoginCubit extends Cubit<LoginState> {
     emit(RememberMeChanged());
   }
 
-  Future<void> login({required String username, required String password}) async {
+  Future<void> login({
+    required String username,
+    required String password,
+  }) async {
     emit(LoginLoading());
     try {
       final response = await DioHelper.postRequest(

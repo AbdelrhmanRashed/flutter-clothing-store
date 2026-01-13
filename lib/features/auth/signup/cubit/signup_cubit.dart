@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:final_project/core/helper/cache_helper.dart';
-import 'package:final_project/core/network/api_constants.dart';
-import 'package:final_project/core/network/dio_error_mapper.dart';
-import 'package:final_project/core/network/dio_helper.dart';
+import 'package:Store/core/helper/cache_helper.dart';
+import 'package:Store/core/network/api_constants.dart';
+import 'package:Store/core/network/dio_error_mapper.dart';
+import 'package:Store/core/network/dio_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../models/user_model.dart';
@@ -23,8 +23,7 @@ class SignupCubit extends Cubit<SignupState> {
       final response = await DioHelper.postRequest(
         endPoint: ApiConstants.signUpEndPoint,
         data: {
-          "image":
-              "https://dummyjson.com/icon/emmaj/128",
+          "image": "https://dummyjson.com/icon/emmaj/128",
           "username": username,
           "firstName": firstName,
           "lastName": lastName,

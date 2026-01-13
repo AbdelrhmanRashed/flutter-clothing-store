@@ -1,13 +1,12 @@
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/features/categories/cubit/categories_cubit.dart';
-import 'package:final_project/features/categories/widgets/category_item.dart';
-import 'package:final_project/features/products/products_screen.dart';
-import 'package:final_project/features/products/widgets/products_grid_shimmer.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/features/categories/cubit/categories_cubit.dart';
+import 'package:Store/features/categories/widgets/category_item.dart';
+import 'package:Store/features/products/products_screen.dart';
+import 'package:Store/features/products/widgets/products_grid_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoriesScreen extends StatelessWidget {
-
   const CategoriesScreen({super.key});
 
   @override
@@ -44,8 +43,7 @@ class CategoriesScreen extends StatelessWidget {
                 child: GridView.builder(
                   physics: const BouncingScrollPhysics(),
                   itemCount: state.categories.length,
-                  gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
@@ -53,13 +51,12 @@ class CategoriesScreen extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     return GestureDetector(
-
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) =>
-                                ProductsScreen(
-                                    category: state.categories[index].name),
+                            builder: (_) => ProductsScreen(
+                              category: state.categories[index].name,
+                            ),
                           ),
                         );
                       },
@@ -70,7 +67,6 @@ class CategoriesScreen extends StatelessWidget {
               );
             }
 
-
             return SizedBox();
           },
         ),
@@ -78,4 +74,3 @@ class CategoriesScreen extends StatelessWidget {
     );
   }
 }
-

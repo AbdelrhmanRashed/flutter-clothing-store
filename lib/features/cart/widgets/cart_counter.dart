@@ -1,4 +1,4 @@
-import 'package:final_project/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CounterWidget extends StatelessWidget {
@@ -22,10 +22,7 @@ class CounterWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             quantity.toString(),
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
         ),
         buildButton(Icons.add, onIncrement),
@@ -42,11 +39,7 @@ class CounterWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
           border: Border.all(color: Colors.grey.shade300),
         ),
-        child: Icon(
-          icon,
-          size: 16,
-          color: AppColors.secondColor,
-        ),
+        child: Icon(icon, size: 16, color: AppColors.secondColor),
       ),
     );
   }

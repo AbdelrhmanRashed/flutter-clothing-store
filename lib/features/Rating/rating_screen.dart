@@ -1,5 +1,5 @@
-import 'package:final_project/features/Rating/widget/rating.dart';
-import 'package:final_project/features/Rating/widget/review_card.dart';
+import 'package:Store/features/Rating/widget/rating.dart';
+import 'package:Store/features/Rating/widget/review_card.dart';
 import 'package:flutter/material.dart';
 
 class RatingScreen extends StatelessWidget {

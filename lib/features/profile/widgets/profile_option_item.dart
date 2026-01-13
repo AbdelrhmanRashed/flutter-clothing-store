@@ -1,4 +1,4 @@
-import 'package:final_project/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,7 +30,7 @@ class ProfileOptionItem extends StatelessWidget {
           title,
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
-        trailing: Icon(Icons.arrow_forward_ios, size: 20 ,color: Colors.black,),
+        trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.black),
         onTap: callback,
       ),
     );

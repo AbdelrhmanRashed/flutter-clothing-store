@@ -1,13 +1,13 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:final_project/core/helper/snack_bar_helper.dart';
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_icons.dart';
-import 'package:final_project/core/resources/app_json.dart';
-import 'package:final_project/core/resources/app_loader.dart';
-import 'package:final_project/features/products/widgets/card.dart';
-import 'package:final_project/features/products/widgets/products_grid_shimmer.dart';
-import 'package:final_project/features/search/cubit/search_cubit.dart';
-import 'package:final_project/widgets/search_form_field.dart';
+import 'package:Store/core/helper/snack_bar_helper.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_icons.dart';
+import 'package:Store/core/resources/app_json.dart';
+import 'package:Store/core/resources/app_loader.dart';
+import 'package:Store/features/products/widgets/card.dart';
+import 'package:Store/features/products/widgets/products_grid_shimmer.dart';
+import 'package:Store/features/search/cubit/search_cubit.dart';
+import 'package:Store/widgets/search_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -93,10 +93,12 @@ class SearchScreen extends StatelessWidget {
                           );
                         }
                         if (state is SearchLoading) {
-                          return Expanded(child: Padding(
-                            padding: const EdgeInsets.only(top: 16.0),
-                            child: ProductsGridShimmer(),
-                          ));
+                          return Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 16.0),
+                              child: ProductsGridShimmer(),
+                            ),
+                          );
                         }
                         if (state is SearchSuccess) {
                           return Expanded(

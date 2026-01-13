@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:final_project/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,8 @@ class Carousel extends StatefulWidget {
 
     this.showIndicators = true,
     this.autoPlay = false,
-    required this.ratio, required this.items,
+    required this.ratio,
+    required this.items,
   });
   final List<Widget> items;
   final bool showIndicators;
@@ -50,15 +51,16 @@ class _CarouselState extends State<Carousel> {
         ),
 
         if (widget.showIndicators) const SizedBox(height: 12),
-        if (widget.showIndicators) AnimatedSmoothIndicator(
-          activeIndex: currentIndex,
-          count: widget.count,
-          effect: WormEffect(
-            dotHeight: 8,
-            dotWidth: 8,
-            activeDotColor: AppColors.mainColor,
+        if (widget.showIndicators)
+          AnimatedSmoothIndicator(
+            activeIndex: currentIndex,
+            count: widget.count,
+            effect: WormEffect(
+              dotHeight: 8,
+              dotWidth: 8,
+              activeDotColor: AppColors.mainColor,
+            ),
           ),
-        ),
       ],
     );
   }

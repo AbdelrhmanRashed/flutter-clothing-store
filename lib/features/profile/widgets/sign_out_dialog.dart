@@ -1,5 +1,5 @@
-import 'package:final_project/core/helper/cache_helper.dart';
-import 'package:final_project/core/resources/app_colors.dart';
+import 'package:Store/core/helper/cache_helper.dart';
+import 'package:Store/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../auth/login/view/login_screen.dart';
@@ -47,7 +47,7 @@ class SignOutDialog extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (_) => LoginScreen()),
-                      (route) => false,
+                  (route) => false,
                 );
               },
               style: ElevatedButton.styleFrom(

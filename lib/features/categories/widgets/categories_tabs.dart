@@ -1,5 +1,5 @@
-import 'package:final_project/features/categories/widgets/category_item.dart';
-import 'package:final_project/models/category_model.dart';
+import 'package:Store/features/categories/widgets/category_item.dart';
+import 'package:Store/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesTabs extends StatelessWidget {
@@ -11,8 +11,10 @@ class CategoriesTabs extends StatelessWidget {
     return ListView.separated(
       scrollDirection: Axis.horizontal,
 
-      itemBuilder: (context, index) =>
-          SizedBox(width: 120,child: CategoryItem(category: categories[index])),
+      itemBuilder: (context, index) => SizedBox(
+        width: 120,
+        child: CategoryItem(category: categories[index]),
+      ),
       separatorBuilder: (context, index) => const SizedBox(width: 8),
       itemCount: 4,
     );

@@ -1,11 +1,11 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:final_project/core/helper/snack_bar_helper.dart';
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_loader.dart';
-import 'package:final_project/features/details/details_screen.dart';
-import 'package:final_project/features/products/cubit/products_cubit.dart';
-import 'package:final_project/features/products/widgets/card.dart';
-import 'package:final_project/features/products/widgets/products_grid_shimmer.dart';
+import 'package:Store/core/helper/snack_bar_helper.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_loader.dart';
+import 'package:Store/features/details/details_screen.dart';
+import 'package:Store/features/products/cubit/products_cubit.dart';
+import 'package:Store/features/products/widgets/card.dart';
+import 'package:Store/features/products/widgets/products_grid_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

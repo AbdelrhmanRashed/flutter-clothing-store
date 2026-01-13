@@ -1,15 +1,15 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:final_project/core/helper/snack_bar_helper.dart';
-import 'package:final_project/core/helper/validators.dart';
-import 'package:final_project/core/resources/app_button.dart';
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_loader.dart';
-import 'package:final_project/features/auth/login/view/login_screen.dart';
-import 'package:final_project/features/auth/signup/cubit/signup_cubit.dart';
-import 'package:final_project/features/auth/widgets/app_field.dart';
-import 'package:final_project/features/auth/widgets/custom_password_field.dart';
-import 'package:final_project/features/home_navigation/view.dart';
-import 'package:final_project/widgets/banner.dart';
+import 'package:Store/core/helper/snack_bar_helper.dart';
+import 'package:Store/core/helper/validators.dart';
+import 'package:Store/core/resources/app_button.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_loader.dart';
+import 'package:Store/features/auth/login/view/login_screen.dart';
+import 'package:Store/features/auth/signup/cubit/signup_cubit.dart';
+import 'package:Store/features/auth/widgets/app_field.dart';
+import 'package:Store/features/auth/widgets/custom_password_field.dart';
+import 'package:Store/features/home_navigation/view.dart';
+import 'package:Store/widgets/banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +42,6 @@ class SignupScreen extends StatelessWidget {
             }
 
             if (state is SignupSuccess) {
-
               SnackBarHelper.show(
                 context: context,
                 message: "Sign Up Successfully",
@@ -51,7 +50,7 @@ class SignupScreen extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (_) => HomeNav()),
-                    (route) => false,
+                (route) => false,
               );
             }
           },

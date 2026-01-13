@@ -1,4 +1,4 @@
-import 'package:final_project/core/helper/date_formater.dart';
+import 'package:Store/core/helper/date_formater.dart';
 import 'package:flutter/material.dart';
 
 class ReviewCard extends StatelessWidget {
@@ -24,9 +24,7 @@ class ReviewCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 12),
-        ],
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 12)],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +43,7 @@ class ReviewCard extends StatelessWidget {
               Row(
                 children: List.generate(
                   5,
-                      (index) => Padding(
+                  (index) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 1),
                     child: Icon(
                       Icons.star,
@@ -62,26 +60,17 @@ class ReviewCard extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             name,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-            ),
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 2),
           Text(
             email,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
           ),
           const SizedBox(height: 6),
           Text(
             DateFormater.formatDate(date),
-            style: TextStyle(
-              fontSize: 11,
-              color: Colors.grey.shade500,
-            ),
+            style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
           ),
         ],
       ),

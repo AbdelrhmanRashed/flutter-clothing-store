@@ -1,11 +1,11 @@
-import 'package:final_project/core/helper/cache_helper.dart';
-import 'package:final_project/core/resources/app_icons.dart';
-import 'package:final_project/core/resources/app_images.dart';
-import 'package:final_project/core/resources/app_loader.dart';
-import 'package:final_project/features/auth/auth_cubit/auth_cubit.dart';
-import 'package:final_project/features/auth/login/view/login_screen.dart';
-import 'package:final_project/features/profile/widgets/Profile_option_item.dart';
-import 'package:final_project/features/profile/widgets/sign_out_dialog.dart';
+import 'package:Store/core/helper/cache_helper.dart';
+import 'package:Store/core/resources/app_icons.dart';
+import 'package:Store/core/resources/app_images.dart';
+import 'package:Store/core/resources/app_loader.dart';
+import 'package:Store/features/auth/auth_cubit/auth_cubit.dart';
+import 'package:Store/features/auth/login/view/login_screen.dart';
+import 'package:Store/features/profile/widgets/Profile_option_item.dart';
+import 'package:Store/features/profile/widgets/sign_out_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,6 +1,6 @@
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/features/products/products_screen.dart';
-import 'package:final_project/models/category_model.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/features/products/products_screen.dart';
+import 'package:Store/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -41,9 +41,9 @@ class CategoryItem extends StatelessWidget {
                 ),
                 image: category.image.isNotEmpty
                     ? DecorationImage(
-                  image: NetworkImage(category.image),
-                  fit: BoxFit.contain,
-                )
+                        image: NetworkImage(category.image),
+                        fit: BoxFit.contain,
+                      )
                     : null,
               ),
             ),

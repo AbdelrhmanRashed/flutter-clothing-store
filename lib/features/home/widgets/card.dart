@@ -1,5 +1,5 @@
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_icons.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,10 +39,7 @@ class CustomCard extends StatelessWidget {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [
-                          Color(0xFFE9E9EA),
-                          Color(0xFFDADADA),
-                        ],
+                        colors: [Color(0xFFE9E9EA), Color(0xFFDADADA)],
                       ),
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(12),

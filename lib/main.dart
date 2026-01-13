@@ -1,8 +1,8 @@
-import 'package:final_project/core/network/dio_helper.dart';
-import 'package:final_project/features/auth/login/view/login_screen.dart';
-import 'package:final_project/features/cart/cubit/cart_cubit.dart';
-import 'package:final_project/features/home/home_screen.dart';
-import 'package:final_project/features/splash/splash_screen.dart';
+import 'package:Store/core/network/dio_helper.dart';
+import 'package:Store/features/auth/login/view/login_screen.dart';
+import 'package:Store/features/cart/cubit/cart_cubit.dart';
+import 'package:Store/features/home/home_screen.dart';
+import 'package:Store/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

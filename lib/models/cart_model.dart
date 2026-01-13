@@ -1,4 +1,4 @@
-import 'package:final_project/models/products_model.dart';
+import 'package:Store/models/products_model.dart';
 
 class CartModel {
   final int id;
@@ -28,9 +28,6 @@ class CartModel {
   double get total => price * quantity;
 
   Map<String, dynamic> toApiJson() {
-    return {
-      "id": id,
-      "quantity": quantity,
-    };
+    return {"id": id, "quantity": quantity};
   }
 }

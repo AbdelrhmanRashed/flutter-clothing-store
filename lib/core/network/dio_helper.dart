@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:final_project/core/network/api_constants.dart';
+import 'package:Store/core/network/api_constants.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioHelper {

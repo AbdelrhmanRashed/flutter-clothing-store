@@ -1,4 +1,4 @@
-import 'package:final_project/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -48,11 +48,7 @@ class ProductsGridShimmer extends StatelessWidget {
                 const SizedBox(height: 6),
 
                 // price
-                Container(
-                  height: 12,
-                  width: 60,
-                  color: Colors.white,
-                ),
+                Container(height: 12, width: 60, color: Colors.white),
               ],
             ),
           ),

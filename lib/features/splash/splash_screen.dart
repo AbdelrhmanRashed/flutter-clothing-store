@@ -1,7 +1,7 @@
-import 'package:final_project/core/helper/cache_helper.dart';
-import 'package:final_project/core/resources/app_json.dart';
-import 'package:final_project/features/auth/login/view/login_screen.dart';
-import 'package:final_project/features/home_navigation/view.dart';
+import 'package:Store/core/helper/cache_helper.dart';
+import 'package:Store/core/resources/app_json.dart';
+import 'package:Store/features/auth/login/view/login_screen.dart';
+import 'package:Store/features/home_navigation/view.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_icons.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_icons.dart';
 
 class ProductCard extends StatelessWidget {
   final String image;
@@ -98,11 +98,7 @@ class ProductCard extends StatelessWidget {
               ),
             ],
           ),
-          const Positioned(
-            top: 16,
-            right: 16,
-            child: HeartIcon(),
-          ),
+          const Positioned(top: 16, right: 16, child: HeartIcon()),
         ],
       ),
     );

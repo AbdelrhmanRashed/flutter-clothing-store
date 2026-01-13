@@ -1,6 +1,6 @@
-import 'package:final_project/features/cart/widgets/cart_item.dart';
-import 'package:final_project/models/cart_model.dart';
-import 'package:final_project/models/products_model.dart';
+import 'package:Store/features/cart/widgets/cart_item.dart';
+import 'package:Store/models/cart_model.dart';
+import 'package:Store/models/products_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'cart_state.dart';
@@ -48,7 +48,5 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  double get total =>
-      cartItems.fold(0, (sum, item) => sum + item.total);
-
+  double get total => cartItems.fold(0, (sum, item) => sum + item.total);
 }

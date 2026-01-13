@@ -1,8 +1,8 @@
-import 'package:final_project/core/resources/app_button.dart';
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_json.dart';
-import 'package:final_project/features/cart/cubit/cart_cubit.dart';
-import 'package:final_project/features/cart/widgets/cart_item.dart';
+import 'package:Store/core/resources/app_button.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_json.dart';
+import 'package:Store/features/cart/cubit/cart_cubit.dart';
+import 'package:Store/features/cart/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -23,7 +23,6 @@ class CartScreen extends StatelessWidget {
             color: AppColors.secondColor,
             fontWeight: FontWeight.w600,
             fontSize: 18,
-
           ),
         ),
         centerTitle: true,

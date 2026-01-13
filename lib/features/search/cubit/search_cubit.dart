@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:final_project/core/network/api_constants.dart';
-import 'package:final_project/core/network/dio_helper.dart';
-import 'package:final_project/models/products_model.dart';
+import 'package:Store/core/network/api_constants.dart';
+import 'package:Store/core/network/dio_helper.dart';
+import 'package:Store/models/products_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'search_state.dart';

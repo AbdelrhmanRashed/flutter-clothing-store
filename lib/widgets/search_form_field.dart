@@ -1,6 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_icons.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

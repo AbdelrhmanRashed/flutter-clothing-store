@@ -1,4 +1,4 @@
-import 'package:final_project/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppField extends StatelessWidget {
@@ -50,11 +50,11 @@ class AppField extends StatelessWidget {
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(color: Colors.red,width: 2),
+              borderSide: const BorderSide(color: Colors.red, width: 2),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(color: Colors.red,width: 2),
+              borderSide: const BorderSide(color: Colors.red, width: 2),
             ),
           ),
         ),

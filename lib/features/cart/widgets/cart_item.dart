@@ -1,7 +1,7 @@
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/features/cart/cubit/cart_cubit.dart';
-import 'package:final_project/features/cart/widgets/cart_counter.dart';
-import 'package:final_project/models/cart_model.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/features/cart/cubit/cart_cubit.dart';
+import 'package:Store/features/cart/widgets/cart_counter.dart';
+import 'package:Store/models/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,13 +34,9 @@ class CartItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: Colors.grey.shade200,
-            width: 1,
-          ),
+          border: Border.all(color: Colors.grey.shade200, width: 1),
         ),
         child: Row(
           children: [

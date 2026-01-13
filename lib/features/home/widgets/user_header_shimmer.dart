@@ -1,4 +1,4 @@
-import 'package:final_project/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -24,17 +24,9 @@ class UserHeaderShimmer extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 40,
-                height: 10,
-                color: Colors.white,
-              ),
+              Container(width: 40, height: 10, color: Colors.white),
               const SizedBox(height: 6),
-              Container(
-                width: 80,
-                height: 12,
-                color: Colors.white,
-              ),
+              Container(width: 80, height: 12, color: Colors.white),
             ],
           ),
         ],

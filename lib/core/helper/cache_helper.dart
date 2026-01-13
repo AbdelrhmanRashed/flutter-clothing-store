@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:final_project/models/user_model.dart';
+import 'package:Store/models/user_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CacheHelper {
@@ -40,6 +40,5 @@ class CacheHelper {
   static Future<void> deleteUser() async {
     await storage.delete(key: 'user');
     await storage.delete(key: 'token');
-
   }
 }

@@ -1,17 +1,17 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:final_project/core/helper/snack_bar_helper.dart';
-import 'package:final_project/core/resources/app_button.dart';
-import 'package:final_project/core/resources/app_colors.dart';
-import 'package:final_project/core/resources/app_icons.dart';
-import 'package:final_project/core/resources/app_images.dart';
-import 'package:final_project/features/Rating/rating_screen.dart';
-import 'package:final_project/features/cart/cart_screen.dart';
-import 'package:final_project/features/cart/cubit/cart_cubit.dart';
-import 'package:final_project/features/details/cubit/details_cubit.dart';
-import 'package:final_project/features/details/widgets/circle_icon.dart';
-import 'package:final_project/features/details/widgets/details_shimmer.dart';
-import 'package:final_project/features/details/widgets/stock.dart';
-import 'package:final_project/features/details/widgets/products_carousal.dart';
+import 'package:Store/core/helper/snack_bar_helper.dart';
+import 'package:Store/core/resources/app_button.dart';
+import 'package:Store/core/resources/app_colors.dart';
+import 'package:Store/core/resources/app_icons.dart';
+import 'package:Store/core/resources/app_images.dart';
+import 'package:Store/features/Rating/rating_screen.dart';
+import 'package:Store/features/cart/cart_screen.dart';
+import 'package:Store/features/cart/cubit/cart_cubit.dart';
+import 'package:Store/features/details/cubit/details_cubit.dart';
+import 'package:Store/features/details/widgets/circle_icon.dart';
+import 'package:Store/features/details/widgets/details_shimmer.dart';
+import 'package:Store/features/details/widgets/stock.dart';
+import 'package:Store/features/details/widgets/products_carousal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,12 +29,10 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
-
+    return BlocProvider(
       create: (context) => DetailsCubit()..getProductDetails(id: id),
 
-
-  child: Scaffold(
+      child: Scaffold(
         backgroundColor: Colors.white,
 
         body: SafeArea(
@@ -58,7 +56,7 @@ class DetailsScreen extends StatelessWidget {
                   final double priceBeforeDiscount =
                       state.productDetails.price /
                       (1 - state.productDetails.discountPercentage / 100);
-          
+
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -99,7 +97,7 @@ class DetailsScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-          
+
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -133,7 +131,7 @@ class DetailsScreen extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 8),
-          
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -150,7 +148,8 @@ class DetailsScreen extends StatelessWidget {
                                     );
                                   },
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       SvgPicture.asset(AppIcons.star),
                                       const SizedBox(width: 6),
@@ -178,7 +177,7 @@ class DetailsScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-          
+
                                 Row(
                                   children: [
                                     Container(
@@ -212,8 +211,10 @@ class DetailsScreen extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 10),
-          
-                            Stock(text: state.productDetails.availabilityStatus),
+
+                            Stock(
+                              text: state.productDetails.availabilityStatus,
+                            ),
                             const SizedBox(height: 15),
                             Text(
                               "Description",
@@ -242,7 +243,7 @@ class DetailsScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 12),
-          
+
                             Container(
                               width: 44,
                               height: 44,
@@ -322,7 +323,7 @@ class DetailsScreen extends StatelessWidget {
           },
         ),
       ),
-);
+    );
   }
 }
 

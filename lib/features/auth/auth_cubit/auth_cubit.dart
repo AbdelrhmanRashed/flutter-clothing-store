@@ -1,5 +1,5 @@
-import 'package:final_project/core/helper/cache_helper.dart';
-import 'package:final_project/models/user_model.dart';
+import 'package:Store/core/helper/cache_helper.dart';
+import 'package:Store/models/user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_state.dart';
