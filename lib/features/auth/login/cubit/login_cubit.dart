@@ -41,7 +41,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginSuccess());
       }
     } on DioException catch (e) {
-      emit(LoginFailure(DioErrorMapper.handleError(e)));
+      emit(LoginFailure("Username or password is incorrect"));
     } catch (e) {
       emit(LoginFailure(e.toString()));
     }
